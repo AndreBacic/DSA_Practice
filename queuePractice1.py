@@ -57,12 +57,5 @@ class MyCircularQueue:
             return True
         return False
 
-
-# Your MyCircularQueue object will be instantiated and called as such:
-# obj = MyCircularQueue(k)
-# param_1 = obj.enQueue(value)
-# param_2 = obj.deQueue()
-# param_3 = obj.Front()
-# param_4 = obj.Rear()
-# param_5 = obj.isEmpty()
-# param_6 = obj.isFull()
+        # better isFull algorithm:
+        # return ((self._tail + 1) % self._size) == self._head
