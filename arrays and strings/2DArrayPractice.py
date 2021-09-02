@@ -1,6 +1,17 @@
 from typing import List
 
 class Solution:
+    def generate(self, numRows: int) -> List[List[int]]: # pascal's triangle generator
+        output = [[1]]
+        for i in range(numRows-1):
+            newRow = [1]
+            for j in range(1, i+1):
+                newRow.append(output[i][j-1] + output[i][j])
+            newRow.append(1)
+            output.append(newRow)
+
+        return output
+
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         up_bound = 0
         down_bound = len(matrix)-1
