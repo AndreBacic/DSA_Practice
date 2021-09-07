@@ -4,12 +4,44 @@ class Solution:
     def openLock(self, deadends: List[str], target: str) -> int:
         if "0000" in deadends:
             return -1
-        
+        elif target == "0000": return 0
 
+        deadends_dict = {}
+        for end in deadends:
+            deadends_dict[end] = True
         
+        queue = ["0000"]
+        visited = {"0000":True}
+        step = -1
+
+        while (len(queue) > 0):
+            step += 1
+            size = len(queue)
+            for i in range(size):
+                current = queue.pop(0)
+                if current == target:
+                    return step
+                for i in range(4):
+                    for b in [True, False]:
+                        newCombo = self.turnLock(current, i, b)
+                        if deadends_dict.get(newCombo) == None and visited.get(newCombo) == None:
+                            queue.append(newCombo)
+                            visited[newCombo] = True
+                
+        return -1
+
+    def turnLock(self, currentCombo: str, pos: int, forward: bool = True) -> str:
+        s = int(currentCombo[pos])
+        if forward:
+            s = (s + 1)%10
+        else:
+            s = (s - 1)%10
+        return currentCombo[0:pos]+ str(s) + currentCombo[pos+1:]
+
+
     def openLockWithBFS(self, deadends: List[str], target: str) -> int:
         """
-        Slow as molasses because it has to search through a couple huge lists a bajillion times.
+        Slow as molasses because it has to search through a couple of huge lists a bajillion times.
         """
         if "0000" in deadends:
             return -1
@@ -31,15 +63,8 @@ class Solution:
                             queue.append(newCombo)
                             visited.append(newCombo)
                 
-        return -1
+        return -1    
     
-    def turnLock(self, currentCombo: str, pos: int, forward: bool = True) -> str:
-        s = int(currentCombo[pos])
-        if forward:
-            s = (s + 1)%10
-        else:
-            s = (s - 1)%10
-        return currentCombo[0:pos]+ str(s) + currentCombo[pos+1:]
 
 
 s = Solution()
