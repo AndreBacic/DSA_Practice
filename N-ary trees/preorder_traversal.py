@@ -5,13 +5,13 @@ from typing import List
 class Node:
     def __init__(self, val=None, children=None):
         self.val = val
-        self.children = children
+        self.children: List[Node] = children
 
 
 class Solution:
     def preorder(self, root: 'Node') -> List[int]:
         if not root: return []
-        
+
         output = []
 
         output.append(root.val)
