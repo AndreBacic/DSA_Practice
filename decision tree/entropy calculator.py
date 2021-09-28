@@ -2,6 +2,30 @@ from typing import List
 import math
 
 class Solution:
+    def calculateMaxInfoGain(self, petal_length: List[float], species: List[str]) -> float:
+        if not (petal_length and species) or len(petal_length) != len(species): return 0
+
+        max_info_gain = 0
+        H = self.calculateEntropy(species)
+        l = len(species)
+        for i in petal_length:
+            l1 = []
+            l2 = []
+            for j, s in enumerate(species):
+                if petal_length[j] <= i:
+                    l1.append(s)
+                else:
+                    l2.append(s)
+
+            H1 = self.calculateEntropy(l1) * len(l1) / l
+            H2 = self.calculateEntropy(l2) * len(l2) / l
+            gain = H - H1 - H2
+            if gain > max_info_gain:
+                max_info_gain = gain
+        
+        return max_info_gain
+
+
     def calculateEntropy(self, input: List[int]) -> float:
         # return Sum from i=1 to n of (Probability(Xi) * log2(Probability(Xi)))
         if not input: return 0.0
