@@ -9,7 +9,7 @@ class Solution:
         H = self.calculateEntropy(species)
         l = len(species)
         for i in petal_length:
-            l1 = []
+            l1 = [] # todo: refactor to just move the current item from l2 to l1 instead of remaking the lists. (edit: I did this in another file and have left this code this way for now)
             l2 = []
             for j, s in enumerate(species):
                 if petal_length[j] <= i:
@@ -43,7 +43,7 @@ class Solution:
             s -= i * math.log2(i) # retrns the negative of the sum, so just minus each time.
         
         s = round(s, 5)
-        if s == 0: return 0.0
+        if s == 0: return 0.0 # -0.0 otherwise, which LeetCode doesn't honor.
         return s
 
 s = Solution()
