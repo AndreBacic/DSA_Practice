@@ -31,7 +31,9 @@ public class Solution {
             foreach (var l in memoized) {
                 foreach (var s1 in l) {
                     foreach (var s2 in memoized[i-x-1]) {
-                        more_output.Add($"{s1}{s2}");
+                        string combo = s1 + s2;
+                        if (more_output.Contains(combo)) continue;
+                        more_output.Add(combo);
                         
                     }
                 }
