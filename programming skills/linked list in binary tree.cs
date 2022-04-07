@@ -20,7 +20,6 @@ public class TreeNode {
     }
 }
 
-
 public class Solution {
     public bool IsSubPath(ListNode head, TreeNode root) {
         Stack<TreeNode> stack = new Stack<TreeNode>();
