@@ -20,38 +20,41 @@ public class TreeNode {
     }
 }
 
-public class TreeLinkPair {
-    public TreeNode node;
-    public ListNode list;
-    public TreeLinkPair(TreeNode node, ListNode list) {
-        this.node = node;
-        this.list = list;
-    }
-}
 
 public class Solution {
     public bool IsSubPath(ListNode head, TreeNode root) {
-        Stack<TreeLinkPair> stack = new Stack<TreeLinkPair>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
 
-        stack.Push(new TreeLinkPair(root, head));
+        stack.Push(root);
 
         while (stack.Count > 0) {
-            TreeLinkPair pair = stack.Pop();
+            TreeNode node = stack.Pop();
 
-            if (pair.node == null) {
-                continue;
+            if (node.left != null) {
+                stack.Push(node.left);
             }
-            
-            stack.Push(new TreeLinkPair(pair.node.left, head));
-            stack.Push(new TreeLinkPair(pair.node.right, head));
+            if (node.right != null) {
+                stack.Push(node.right);
+            }
 
-            if (pair.node.val == pair.list.val) {
-                if (pair.list.next == null) {
+            if (node.val == head.val) {
+                bool isSubPath = isSubPathFromRoot(head, node);
+                if (isSubPath) {
                     return true;
                 }
-                stack.Push(new TreeLinkPair(pair.node.left, pair.list.next));
-                stack.Push(new TreeLinkPair(pair.node.right, pair.list.next));
             }
+        }
+        return false;
+    }
+    public bool isSubPathFromRoot(ListNode head, TreeNode root) {
+        if (head == null) {
+            return true;
+        }
+        if (root == null) {
+            return false;
+        }
+        if (root.val == head.val) {
+            return isSubPathFromRoot(head.next, root.left) || isSubPathFromRoot(head.next, root.right);
         }
         return false;
     }
