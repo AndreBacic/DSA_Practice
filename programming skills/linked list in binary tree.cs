@@ -20,14 +20,39 @@ public class TreeNode {
     }
 }
 
+public class TreeLinkPair {
+    public TreeNode node;
+    public ListNode list;
+    public TreeLinkPair(TreeNode node, ListNode list) {
+        this.node = node;
+        this.list = list;
+    }
+}
+
 public class Solution {
     public bool IsSubPath(ListNode head, TreeNode root) {
-        if (head == null) return true;
-        if (root == null) return false;
-        if (head.val == root.val)
-        {
-            return IsSubPath(head.next, root.left) || IsSubPath(head.next, root.right);
+        Stack<TreeLinkPair> stack = new Stack<TreeLinkPair>();
+
+        stack.Push(new TreeLinkPair(root, head));
+
+        while (stack.Count > 0) {
+            TreeLinkPair pair = stack.Pop();
+
+            if (pair.node == null) {
+                continue;
+            }
+            
+            stack.Push(new TreeLinkPair(pair.node.left, head));
+            stack.Push(new TreeLinkPair(pair.node.right, head));
+
+            if (pair.node.val == pair.list.val) {
+                if (pair.list.next == null) {
+                    return true;
+                }
+                stack.Push(new TreeLinkPair(pair.node.left, pair.list.next));
+                stack.Push(new TreeLinkPair(pair.node.right, pair.list.next));
+            }
         }
-        return IsSubPath(head, root.left) || IsSubPath(head, root.right);
+        return false;
     }
 }
