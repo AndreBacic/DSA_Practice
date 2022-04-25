@@ -1,7 +1,9 @@
 public class Solution0 {
     /// <summary>
     /// My original idea but the variables l2 and l1 are actually unnecessary.
-    /// More importantly, the expand around center method returns a string instead of int.
+    /// More importantly, the expand around center method returns a string instead of int, 
+    /// which causes the space complexity to be O(n^2) (I think, maybe the garbage collector makes the space complexity O(1)).
+    ///
     /// O(n^2) time and O(n) space.
     /// </summary>
     public string LongestPalindrome(string s) {
@@ -52,6 +54,15 @@ public class Solution0 {
     }
 }
 
+/// <summary>
+/// This solution improves off of Solution0, reducing the space complexity to O(1)
+/// by not using strings or those unnecessary variables.
+/// Overall runtime is reduced by not having to allocate strings to memory.
+///
+/// I confess that I had to look at the LeeCode solution to know to do this (but I did come up with the algorithm ^).
+///
+/// O(n^2) time and O(1) space.
+/// </summary>
 public class Solution {
     public string LongestPalindrome(string s) {
         if (s == null || s.Length == 0) {
@@ -64,9 +75,27 @@ public class Solution {
         int start = 0;
         for (int i = 0; i < s.Length; i++)
         {
+            int evenLen = ExpandAroundCenter(s, i, i);
+            int oddLen = ExpandAroundCenter(s, i, i + 1);
+            int len = Math.Max(evenLen, oddLen);
+            if (len > maxLen)
+            {
+                maxLen = len;
+                start = i - (len - 1) / 2; // C# rounds down in integer division
+            }
             
         }
-        return "";
+        return s.Substring(start, maxLen);
+    }
+
+    private int ExpandAroundCenter(string s, int left, int right)
+    {
+        while (left >= 0 && right < s.Length && s[left] == s[right])
+        {
+            left--;
+            right++;
+        }
+        return right - left - 1;
     }
 }
 
@@ -76,6 +105,7 @@ public class ManachersAlgorithm {
         // O(n) time and O(n) space        
         // https://en.wikipedia.org/wiki/Longest_palindromic_substring#Manacher's_algorithm
         // NOTE: This code was generated with GitHub Copilot.
+        // TODO: THIS CODE DOES NOT WORK AND MUST BE DEBUGGED AT SOME POINT
 
         if (s == null || s.Length == 0) {
             return "";
