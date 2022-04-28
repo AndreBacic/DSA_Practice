@@ -23,7 +23,7 @@ public class SolutionSubmitted {
 }
 
 /// <summary>
-/// Leet code solution.
+/// LeetCode solution.
 /// </summary>
 public class Solution {
     public int MaxProfit(int[] prices) {
@@ -39,6 +39,7 @@ public class Solution {
     }
 }
 
+/*
 /// <summary> 
 /// This solution doesn't work for a case where the max profit is after the max high and before the min low ([4, 2, 3, 1] returns 0)
 /// </summary>
@@ -59,9 +60,9 @@ public class SolutionNeg1 {
             return h1 - l1;
         }
 
-        // so, if the max high comes before the min low, then the max profit is 
-        // either between the max high and min low before it,
-        // or between the min low and max high after it
+        /// so, if the max high comes before the min low, then the max profit is 
+        /// either between the max high and min low before it,
+        /// or between the min low and max high after it
         int l2 = 100001, h2 = -1;
 
         for (int i = 0; i < hi; i++) {
@@ -76,6 +77,7 @@ public class SolutionNeg1 {
         return max;
     }
 }
+*/
 
 class Program {
     static void Main(string[] args) {
