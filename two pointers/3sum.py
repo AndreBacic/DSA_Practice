@@ -22,22 +22,28 @@ class Solution:
                     i = mid + 1
             return False
 
-        # O(n^2 (log(n) + r/2) ) time (where r is the final length of output), O(1) space
+        # O(n^2) time, O(1) space
         p1 = 0
         p2 = len(nums) - 1
         while p2 - p1 > 1:
+            if p1 > 0 and nums[p1] == nums[p1-1]:
+                p1 += 1
+                continue
 
-            while p2 - p1 > 1:
-                missing = -(nums[p1] + nums[p2])
-                if binary_search(missing, p1+1, p2-1):
-                    new_triplet = [nums[p1], missing, nums[p2]]
-                    if new_triplet not in output:
-                        output.append(new_triplet)
-
-                if nums[p2] == 0:
-                    break
-                
-                p2 -= 1
+            p3 = p1 + 1
+            while p3 < p2:
+                if nums[p1] + nums[p2] + nums[p3] == 0:
+                    output.append([nums[p1], nums[p2], nums[p3]])
+                    while p3 < p2 and nums[p3] == nums[p3+1]:
+                        p3 += 1
+                    while p2 > p1 and nums[p2] == nums[p2-1]:
+                        p2 -= 1
+                    p3 += 1
+                    p2 -= 1
+                elif nums[p1] + nums[p2] + nums[p3] > 0:
+                    p2 -= 1
+                else:
+                    p3 += 1
             
             if nums[p1] == 0:
                 break
