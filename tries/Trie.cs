@@ -2,10 +2,20 @@ public class Trie {
     
     private TrieNode root; 
 
+    /// <summary>
+    /// Initializes an empty symbol table.
+    /// O(1) time and space.
+    /// </summary>
     public Trie() {
         root = new TrieNode("");
     }
     
+    /// <summary>
+    /// Adds the word to the symbol table.
+    /// O(n) time
+    /// O(1) space best case (last letter is the only new letter)
+    /// O(n) space worst case (all letters are new)
+    /// </summary>
     public void Insert(string word) {
         TrieNode n = root;
         int depth = 0;
@@ -22,6 +32,13 @@ public class Trie {
         n.val = word;
     }
     
+    /// <summary>
+    /// Returns true if the word is in the symbol table.
+    /// Note that if word is a prefix of some other word in the symbol table, false will be returned.
+    /// O(n) time worst case (word is in the trie)
+    /// O(1) time best case (first letter isn't in the trie's root's children)
+    /// O(1) space
+    /// </summary>
     public bool Search(string word) {
         TrieNode n = root;
         foreach (char l in word) {
@@ -34,6 +51,12 @@ public class Trie {
         return n.val == word;
     }
     
+    /// <summary>
+    /// Returns true if there is any word in the symbol table that starts with the given prefix.
+    /// O(n) time worst case (prefix is in the trie)
+    /// O(1) time best case (prefix isn't in the trie's root's children)
+    /// O(1) space
+    /// </summary>
     public bool StartsWith(string prefix) {
         TrieNode n = root;
         foreach (char l in prefix) {
