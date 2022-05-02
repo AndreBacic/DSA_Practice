@@ -14,8 +14,29 @@ class Solution:
             if s == x: return floor(g)
             elif s > x: h = g
             elif s < x: l = g
-
+    
     def search(self, nums: List[int], target: int) -> int:
+        """
+        Binary search of sorted list nums for target.
+        """
+        l = 0
+        r = len(nums)-1
+        while l <= r:
+            m = (l+r)//2
+            if nums[m] == target:
+                return m
+            elif nums[m] > target:
+                r = m - 1
+            else: # nums[m] < target
+                l = m + 1        
+        return -1
+
+
+    def search2(self, nums: List[int], target: int) -> int:
+        """
+        Binary search of sorted list nums for target.
+        Beat 99.46% of Leetcode python3 submissions! (by speed)
+        """
         l = 0
         r = len(nums)-1
         while True:
