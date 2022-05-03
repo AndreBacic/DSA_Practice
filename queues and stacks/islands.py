@@ -5,7 +5,10 @@ import time
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         """
-        Destroys the grid but tallys quickly
+        Destroys the grid but tallies quickly
+
+        O(n) time, where n is grid.length * grid[0].length (worst case is 2n, where every cell is a 1 and gets visited twice)
+        O(n) space (recursion stack)
         """
         islandCount = 0
         for i in range(len(grid)):
@@ -24,7 +27,7 @@ class Solution:
                 continue
             self.addIslandAndDestroy(a, b, grid)
 
-
+    # I think a faster non-destructive solution is to just make a copy of the grid and then mess up the copy
     def numIslandsNotDestructive(self, grid: List[List[str]]) -> int:
         """
         This function doesn't handle large data sets well.
