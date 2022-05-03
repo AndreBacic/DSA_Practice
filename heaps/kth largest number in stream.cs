@@ -1,5 +1,34 @@
 
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * KthLargest obj = new KthLargest(k, nums);
+ * int param_1 = obj.Add(val);
+ */
+public class KthLargest {
+    private MinHeap heap = new MinHeap();
+    private int k;
 
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        foreach (int i in nums) {
+            heap.Add(i);
+        }
+        while (heap.Size() > k) {
+            heap.Pop();
+        }
+    }
+    
+    public int Add(int val) {
+        if (val < heap.Peek() && heap.Size() >= k) {
+            return heap.Peek();
+        }
+        heap.Add(val);
+        if (heap.Size() > k) {
+            heap.Pop();    
+        }        
+        return heap.Peek();
+    }
+}
 
 /// <summary>
 /// Even though LeetCode condemns this approach as 'naive,' it beat 88% of submissions by speed.
@@ -35,9 +64,3 @@ public class KthLargestNaiveApproach {
         return nums[nums.Count - k]; // min of k is 1
     }
 }
-
-/**
- * Your KthLargest object will be instantiated and called as such:
- * KthLargest obj = new KthLargest(k, nums);
- * int param_1 = obj.Add(val);
- */

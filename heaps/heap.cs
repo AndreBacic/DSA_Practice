@@ -4,6 +4,8 @@ using System.Collections.Generic;
 /// <summary>
 /// Implementation of a min heap
 /// Uses a List to store the binary tree, which makes easy to find parent and children indices
+/// The formulas for finding parent and children indices are slightly weird because 
+///     this implementation uses the 0th index as the root instead of the 1st index
 /// </summary>
 public class MinHeap {
     private List<int> nums = new List<int>();
@@ -42,7 +44,7 @@ public class MinHeap {
         return nums[0];
     }
     public int Size() {
-        return nums.Count - 1;
+        return nums.Count;
     }
     private int Parent(int i) {
         return (i-1)/2;
