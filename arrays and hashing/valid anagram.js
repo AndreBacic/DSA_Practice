@@ -5,11 +5,11 @@
  * @param {string} s
  * @param {string} t
  * @return {boolean}
- * O(n) time, O(n) space
+ * O(n) time, O(m) space (where m is the length of the set of unique characters in s)
  */
  const isAnagram = function(s, t) {
     // algo 1: take 1st letter and delete in both, if missing FALSE, if "" TRUE
-    //  ^ O(n^2) worst case, O(n) best, O(n^2) average
+    //  ^ O(n^2) time worst case, O(n) best, O(n^2) average
     
     // algo 2 & 3: use str[26], one index per letter, to simulate a hash table
     // or use a hash table (unicode-friendly)
