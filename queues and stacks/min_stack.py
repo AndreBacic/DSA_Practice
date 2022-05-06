@@ -1,30 +1,45 @@
+class Node:
+    def __init__(self, value, min):
+        self.value = value
+        self.next = None
+        self.min = min
+
 class MinStack:
 
     def __init__(self):
         """
         initialize your data structure here.
         """
-        self._stack = []
+        self.root = None
+        self.min = 4294967296 # 2**32, larger than guaranteed max value
         
-
     def push(self, val: int) -> None:
-        self._stack.append(val)
+        if val < self.min:
+            self.min = val
+        n = Node(val,self.min)
+        n.next = self.root
+        self.root = n
 
     def pop(self) -> None:
-        self._stack.pop()
+        v = self.root.value
+        self.root = self.root.next
+        if self.root:
+            self.min = self.root.min
+        else:
+            self.min = 4294967296
+        return v
 
     def top(self) -> int:
-        return self._stack[-1]
+        return self.root.value
 
     def getMin(self) -> int:
-        if not self._stack:
-            return 0
-
-        low = self._stack[0]
-        if len(self._stack) == 1:
-            return low
+        return self.min
         
-        for i in self._stack[1:]:
-            if i < low:
-                low = i
-        return low
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(val)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
