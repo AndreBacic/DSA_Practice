@@ -1,10 +1,24 @@
 class Node:
+    """
+    Node class for a linked list in a min stack
+    Each node also stores the minimum value in the stack at the time the node was created
+    """
     def __init__(self, value, min):
         self.value = value
         self.next = None
         self.min = min
 
 class MinStack:
+    """
+    A stack that supports push, pop, top, and retrieving the minimum element in constant time.
+    
+    O(1) time (for all operations), O(n) space (for the linked list)
+
+    There are, to my knowledge, three ways to implement a min stack:
+    1) Use a linked list, where each node stores the minimum value in the stack at the time the node was created
+    2) Use a stack array of arrays, where each sub array is [val, min_val_at_this_point]
+    3) Use two stacks, one for the values and one for the min values
+    """
 
     def __init__(self):
         """
@@ -27,7 +41,7 @@ class MinStack:
             self.min = self.root.min
         else:
             self.min = 4294967296
-        return v
+        #return v # uncomment if you want to return the value popped
 
     def top(self) -> int:
         return self.root.value
