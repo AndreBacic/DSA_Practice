@@ -19,6 +19,6 @@ public class Solution {
             else if (s < target) i++;
             else j--;
         }
-        return new int[2] {i+1,j+1}; // code should never reach here, but C# compiler throws an error if we don't return something
+        return new int[2] {-1,-1}; // code should never reach here, but C# compiler throws an error if we don't return something
     }
 }
