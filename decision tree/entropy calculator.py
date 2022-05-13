@@ -40,7 +40,7 @@ class Solution:
         
         s = 0.0
         for i in probs.values():
-            s -= i * math.log2(i) # retrns the negative of the sum, so just minus each time.
+            s -= i * math.log2(i) # returns the negative of the sum, so just minus each time.
         
         s = round(s, 5)
         if s == 0: return 0.0 # -0.0 otherwise, which LeetCode doesn't honor.
