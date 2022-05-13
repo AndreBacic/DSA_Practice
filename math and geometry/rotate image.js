@@ -16,6 +16,10 @@
     }
 }
 
+/**
+ * @param {number[][]} matrix
+ * @return {void} Does not return anything, but modifies matrix in-place instead.
+ */
 function rotate2(m) {
     let l = m.length
     //transpose (flip across i=j diagonal axis)

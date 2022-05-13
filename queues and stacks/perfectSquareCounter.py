@@ -24,15 +24,15 @@ class Solution:
 
 
 s = Solution()
-tg = time.time()
+tg = time.perf_counter()
 d = []
 for i in range(1, 10000):
-    t = time.time()
+    t = time.perf_counter()
     n = s.numSquares(i)
-    t1 = time.time()-t
+    t1 = time.perf_counter()-t
     d.append([i, n, t1])
 
-print(time.time()-tg)
+print(time.perf_counter()-tg)
 for l in d:
     if l[1] > 4 or l[2] > 0.1:
         print(l)
