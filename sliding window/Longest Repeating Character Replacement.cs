@@ -1,7 +1,30 @@
 public class Solution {
+    /// <summary>
+    /// Optimized solution to Longest Repeating Character Replacement (LeetCode #424)
+    /// O(n) time, O(1) space (uses an array of length 26 very time)
+    /// </summary>
+    public int CharacterReplacement(string s, int k) {
+        if (k >= s.Length-1) return s.Length; // we can make the entire string the same letter
+        
+        int[] letterCounts = new int[26]; // Only capital English letters
+        int largest = k+1; // minimum longest if all letters are unique
+        int maxCount = 0;
+        int l = 0, r = 0;
+        
+        while (r < s.Length) {
+            letterCounts[s[r]-'A']++;
+            maxCount = Math.Max(letterCounts[s[r]-'A'], maxCount);
+            while (r-l - maxCount >= k) { // the 'while' can be replaced with 'if' (the condition only needs to be checked once), but this way runs faster
+                letterCounts[s[l]-'A']--;
+                l++;
+            }
+            largest = Math.Max(largest, 1+r-l);
+            r++;
+        }     
+        
+        return largest;
+    }
 
-
-    
     /// <summary>
     /// First attempt: works, but is very slow.
     /// O(n^2) time, O(1) space
