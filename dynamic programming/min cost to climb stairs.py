@@ -1,7 +1,7 @@
 from typing import List
 
 # this solution works, but doesn't memoize calculated results,
-# so it has a runtime of O(2^n) (and space of O(2^n) because of the recursion call stack)
+# so it has a runtime of O(2^n) (and space of O(n) because of the dfs recursion call stack)
 def f(l):    
     if len(l) <= 2: return l[0]
     return l[0] + min(f(l[1:]), f(l[2:]))
