@@ -2,8 +2,8 @@ public class Solution
 {
     /// <summary>
     /// where n is candidates.Length and k is target
-    /// O(nk) time (worst case)
-    /// O(nk) space (worst case)
+    /// O(n * n^k) time (worst case)
+    /// O(n * n^k) space (worst case)
     /// Because the DFS depth limit is k/min(candidates)
     /// </summary>
     /// <param name="candidates"></param>
@@ -31,11 +31,12 @@ public class Solution
         */
         Array.Sort(candidates);
         List<IList<int>> output = (List<IList<int>>)DFS(candidates, target);
-        foreach (List<int> l in output)
-        {
-            l.Reverse();
-        }
-        output.Reverse();
+        // Uncomment to have output sorted from low to high
+        // foreach (List<int> l in output)
+        // {
+        //     l.Reverse();
+        // }
+        // output.Reverse();
         return output;
 
     }
