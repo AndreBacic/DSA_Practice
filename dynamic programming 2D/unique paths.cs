@@ -10,13 +10,9 @@ public class Solution
     {
         if (m > n) (m, n) = (n, m);
 
-        long num = 1, denom = 1;
+        decimal num = 1, denom = 1;
 
-        for (int i = 1; i < m; i++)
-        {
-            num *= n;
-            n++;
-        }
+        for (int i = 1; i < m; i++) { num *= n; n++; }
         for (int j = m - 1; j > 1; j--) denom *= j;
 
         return (int)(num / denom);
