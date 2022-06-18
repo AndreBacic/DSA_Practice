@@ -17,5 +17,5 @@ class Solution:
             n = sum(int(d)**2 for d in str(n))
         return n==1
 
-    # note that someone made an 18ms solution that just performs 6 iterations, 
+    # note that someone made an 18ms solution (my best was 36ms) that just performs 6 iterations, 
     # and if n is not a happy number by that point it will return False.
