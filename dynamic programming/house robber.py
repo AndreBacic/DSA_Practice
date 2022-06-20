@@ -6,4 +6,4 @@ class Solution:
         a, b = 0, 0
         for n in nums:
             a, b = b, max(a+n, b)
-        return b
+        return b  # on second thought, it would save even more space to just mutate the original list in place. O(0) space, I think.
